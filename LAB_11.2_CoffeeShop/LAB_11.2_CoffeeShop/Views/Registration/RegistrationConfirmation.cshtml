@@ -1,0 +1,40 @@
+﻿@model LAB_11._2_CoffeeShop.Models.MemberRegistration;
+
+@{
+    ViewData["Title"] = "Registration Confirmation";
+}
+
+<h1>Registration Confirmation</h1>
+<p>Welcome!</p>
+
+First Name: @Model.FirstName<br />
+
+Last Name: @Model.LastName<br />
+
+Email: @Model.Email <br />
+
+Mobile: @{
+    long.TryParse(Model.Mobile, out long phoneNumberLong);
+    string s = string.Format("{0: (###) ###-####}", phoneNumberLong);
+    }
+@s
+<br />
+
+Birthday: @Model.BirthMonth/@Model.BirthDay/@Model.BirthYear<br />
+
+Gender: @Model.Gender<br />
+
+Password: @Model.Password<br />
+<br />
+
+@{
+    if (Model.Newsletter == true)
+    {
+        <p>Thank you for signing up for our monthly newsletter.</p>
+    }
+}
+A confirmation email has been sent to @Model.Email
+<br />
+
+Once you confirm, please enjoy a free latte on us!
+

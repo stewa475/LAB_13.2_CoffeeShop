@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "ProductsIndex";
+    List<Product> Products = (List<Product>)ViewData["Products"];
+}
+
+<div class="text-left">
+    <h1 class="display-4">caracafé Menu:</h1>
+    <div>
+        <ul>
+            @foreach (Product p in Products)
+            {
+                <li>@p.Name (@p.Category) @p.Description $@p.Price</li>
+            }
+        </ul>
+    </div>
+
+</div>
+

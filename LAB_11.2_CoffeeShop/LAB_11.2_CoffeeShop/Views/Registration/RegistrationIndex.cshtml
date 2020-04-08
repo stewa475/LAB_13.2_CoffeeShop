@@ -1,0 +1,98 @@
+﻿@model LAB_11._2_CoffeeShop.Models.MemberRegistration;
+
+@{
+    ViewData["Title"] = "Registration";
+}
+
+<h1>Sign Up</h1>
+<p>It's quick and easy.</p>
+
+@{
+    if (ViewData["errorMsg"] != null)
+    {
+        <p><strong>@ViewData["errorMsg"]</strong></p>
+    }
+}
+
+<form asp-controller="Registration" asp-action="RegistrationConfirmation" method="post">
+
+    @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { placeholder = "First name", @class = "txtbox" } })&nbsp;
+
+    @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { placeholder = "Last name", @class = "txtbox" } })<br /><br />
+
+    @*@@Html.LabelFor(m => m.Email):*@
+
+    @Html.EditorFor(m => m.Email, new { htmlAttributes = new { placeholder = "Email", @class = "txtbox" } })&nbsp;
+
+    <input type="tel" name="Mobile" placeholder="Mobile" class="txtbox" /><br />
+    @*pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"*@
+    <input asp-for="Newsletter" type="checkbox" data-val="true" name="Newsletter" value="true" />&nbsp;Check to receive our monthly newsletter.&nbsp;
+    <input asp-for="Newsletter" type="hidden" name="Newsletter" value="false" /><br />
+    <br />
+    @Html.EditorFor(m => m.Password, new { htmlAttributes = new { placeholder = "New Password", @class = "txtbox" } })&nbsp;
+
+    @Html.EditorFor(m => m.ConfirmPassword, new { htmlAttributes = new { placeholder = "Confirm Password", @class = "txtbox" } })<br />
+    <small>
+        Must contain at least 10 characters.<br />
+        Must contain at least 1 uppercase character.<br />
+        Must contain at least 1 numeric character.<br />
+    </small>
+
+    @*<small>
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@@#$%^&*])(?=.{10,})"
+            Must contain at least 10 characters.<br />
+            Must contain at least 1 lowercase character.<br />
+            Must contain at least 1 uppercase character.<br />
+            Must contain at least 1 numeric character.<br />
+            Must contain at least one special character (!@@#$%^&*).<br />
+        </small>*@
+
+    <br />
+    <fieldset>
+        <legend>Birthday</legend>
+        <select asp-for="BirthMonth">
+
+            @{
+                string[] months = MemberItems.Months;
+                foreach (string m in months)
+                {
+                    <option>@m</option>
+                }
+            }
+        </select>
+        <select asp-for="BirthDay">
+
+            @{
+                string[] days = MemberItems.Days;
+                foreach (string d in days)
+                {
+                    <option>@d.ToString()</option>
+                }
+            }
+        </select>
+        <select asp-for="BirthYear">
+
+            @{
+                string[] years = MemberItems.Years;
+                foreach (string y in years)
+                {
+                    <option>@y</option>
+                }
+            }
+        </select>
+    </fieldset>
+
+    <br />
+    <fieldset>
+        <legend>Gender</legend>
+        <input asp-for="Gender" type="radio" name="gender" value="Female" />&nbsp;Female&nbsp;
+        <input asp-for="Gender" type="radio" name="gender" value="Male" />&nbsp;Male&nbsp;
+        <input asp-for="Gender" type="radio" name="gender" value="Custom" />&nbsp;Custom&nbsp;
+    </fieldset>
+    <br />
+
+    <input type="submit" value="Sign Up!" class="submitButton" />
+</form>
+
+
+
